@@ -1,12 +1,12 @@
 from random import *
 import time
 roomNumbers = [0,1,2,3,100,200,101,201,103,104,105,203,204,302,303.402,403]
-roomArray = [] 
-itemArray = []
+itemArray = [] 
+
+
 for i in range(999):
     roomArray.append(False)
     itemArray.append(False)
-
 
 
 
@@ -20,26 +20,47 @@ roomArray[201] = "There is a wall to the east and south of you. In the corner yo
 itemArray[0] = "Nail"
 itemArray[100] = "Watch"
 itemArray[201] = "High School Diploma"
+itemArray[103] = "books"
+itemArray[204] = "pillows"
 
-if location == 0:
-    print("You have a Nail in your inventory.")
-    inventory.append("Nail")
-if location == 100:
-    print("You have a very valuable watch.")
-    inventory.append("Watch")
-if location == 201:
-    print("You now have a high school diploma.")
-    inventory.append("Diploma")
+def doesRoomExist(roomNumber):
+    try:
+        if roomArray[roomNumber] == False:
+            print("You can't go there!")
+            return False
+        else:
+            return True
+    except:
+        print("You can't go there!")
+        return False
+
+def move(userInput, location):
+    userInput = userInput.lower()
+    if userInput == "n" and roomDoesExist(location - 1):
+        location -= 1
+    if userInput == "e" and roomDoesExist(location - 1):
+        location += 100
+    if userInput == "s" and roomDoesExist(location - 1):
+        location += 1
+    if userInput == "w" and roomDoesExist(location - 1):
+        location -= 100
+    else:
+        print("Invalid option!")
+    return location
 
 def main():
   location = 0
   print("The Escape")
-  print("By Dhruv, Taylor, Rishil, and Buk")
+  print("By Dhruv, Katherina, Rishil, and Buk")
   time.sleep(1)
   while True:
-    print("")
+    print("==========")
     print("Please type n, s, e, w, or quit")
+    print("==========")
     userInput = input()
-    move(userInput,location)
-    location = userInput()
+    userInput = userInput.lower()
+    if userInput == "quit":
+        break
+    else:
+        location = move(userInput, location)
 
